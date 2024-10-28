@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://doc4emx2a01jt"]
+
+[node name="XROrigin3D" type="XROrigin3D"]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="."]
+
+[node name="LeftXRController3D" type="XRController3D" parent="."]
+tracker = &"right_hand"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="LeftXRController3D"]
+
+[node name="RightXRController3D2" type="XRController3D" parent="."]
+tracker = &"right_hand"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RightXRController3D2"]

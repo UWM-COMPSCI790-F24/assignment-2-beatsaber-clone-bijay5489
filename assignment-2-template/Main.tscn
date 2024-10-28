@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://ca8ydtxy67gvs"]
+
+[ext_resource type="PackedScene" uid="uid://duiahmeuhlxu7" path="res://LaserSword.tscn" id="2_be37d"]
+[ext_resource type="PackedScene" uid="uid://cnwp7ndjr4s8y" path="res://addons/assect/Quest2Controllers/Quest2Controllers/OculusQuest2TouchController_Left.gltf" id="2_cfq8y"]
+[ext_resource type="PackedScene" uid="uid://bc8lh0rihgxvi" path="res://addons/assect/Quest2Controllers/Quest2Controllers/OculusQuest2TouchController_Right.gltf" id="3_ajlo0"]
+[ext_resource type="Script" path="res://cube_spawner.gd" id="4_wy34y"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mog4p"]
+size = Vector3(5, 0.1, 5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_pgvxs"]
+size = Vector3(5, 0.1, 5)
+
+[node name="Main" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_mog4p")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D"]
+mesh = SubResource("BoxMesh_pgvxs")
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+
+[node name="XRController3D" type="XRController3D" parent="XROrigin3D"]
+tracker = &"left_hand"
+
+[node name="OculusQuest2TouchController_Left" parent="XROrigin3D/XRController3D" instance=ExtResource("2_cfq8y")]
+
+[node name="LaserSword" parent="XROrigin3D/XRController3D" instance=ExtResource("2_be37d")]
+controller_id = 1
+
+[node name="XRController3D2" type="XRController3D" parent="XROrigin3D"]
+tracker = &"right_hand"
+
+[node name="OculusQuest2TouchController_Right" parent="XROrigin3D/XRController3D2" instance=ExtResource("3_ajlo0")]
+
+[node name="LaserSword" parent="XROrigin3D/XRController3D2" instance=ExtResource("2_be37d")]
+controller_id = 2
+
+[node name="CubeSpawner" type="Node3D" parent="."]
+script = ExtResource("4_wy34y")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
